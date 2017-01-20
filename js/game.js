@@ -1,5 +1,6 @@
  var objA;
-    var objB;
+var objB;
+var objC;
 var radius=20;
 var length=50;
 var breadth=40;
@@ -8,16 +9,23 @@ var height=40;
     var objAtop = 50;
     var objBleft;
     var objBtop;
+    var objCleft;
+    var objCtop;
+
     var ctx;
     var cannvas;
 function init() {
 
     objA = Math.floor(Math.random() * 3);
     objB = Math.floor(Math.random() * 3);
+    objC = Math.floor(Math.random() * 3);
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     objBtop=canvas.height - 100;
     objBleft=canvas.width -100;
+    objCleft=canvas.width/2+70-Math.floor(Math.random()*200);
+    objCtop=canvas.height/2+70-Math.floor(Math.random()*200);
+
     draw();
 
 }
@@ -54,7 +62,21 @@ function draw() {
             drawcircle(objBleft,objBtop,radius);
             break;
     }
-    console.log("end of checking objB");
+     switch (objC) {
+         case 0:
+            drawtriangle(objCleft,objCtop,height);
+            console.log("triangle drawn");
+            break;
+        case 1:
+           drawcircle(objCleft,objCtop,radius);
+            break;
+        case 2:
+            drawrectangle(objCleft,objCtop,length,breadth);
+            break;
+        default:
+            drawcircle(objCleft,objCtop,radius);
+            break;
+    }
 
 
 }
@@ -93,3 +115,7 @@ function drawrectangle(x,y,length,breadth){
     ctx.stroke();
 }
 window.onload=init;
+
+function buttonClicked(){
+    location.reload(true);
+}

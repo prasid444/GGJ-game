@@ -12,3 +12,10 @@
     height: 100%;
     width: 100%;
 }
+
+.myButton {
+    position: absolute;
+    left: 90%;
+    top: 10%;
+    background-color: aqua;
+}
