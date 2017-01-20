@@ -3,11 +3,11 @@
 var radius=20;
 var length=50;
 var breadth=40;
-var height=20;
-    var objAleft = 50;
+var height=40;
+    var objAleft=50;
     var objAtop = 50;
-    var objBleft = 550;
-    var objBtop = 550;
+    var objBleft;
+    var objBtop;
     var ctx;
     var cannvas;
 function init() {
@@ -16,6 +16,8 @@ function init() {
     objB = Math.floor(Math.random() * 3);
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
+    objBtop=canvas.height - 100;
+    objBleft=canvas.width -100;
     draw();
 
 }
@@ -23,7 +25,7 @@ function init() {
 function draw() {
     switch (objA) {
         case 0:
-            drawtrinagle(objAleft,objAtop,height);
+           drawtriangle(objAleft,objAtop,height);
             break;
         case 1:
            drawcircle(objAleft,objAtop,radius);
@@ -36,16 +38,23 @@ function draw() {
             break;
 
     }
+    console.log("beginning of checking objB");
     switch (objB) {
-        case 0:
+         case 0:
+            drawtriangle(objBleft,objBtop,height);
+            console.log("triangle drawn");
             break;
         case 1:
+           drawcircle(objBleft,objBtop,radius);
             break;
         case 2:
+            drawrectangle(objBleft,objBtop,length,breadth);
             break;
         default:
+            drawcircle(objBleft,objBtop,radius);
             break;
     }
+    console.log("end of checking objB");
 
 
 }
@@ -58,20 +67,28 @@ function drawcircle(x,y,r){
            ctx.stroke();
 
 }
-function drawtrinagle(x,y,h){
-            var path = new Path2D();
-            path.moveTo(x,y-h/2);
-            path.lineTo(x-h/2,y+h/2);
-            ctx.stroke(path);
-            path.lineTo(x+h/2,y+h/2);
+function drawtriangle(x,y,h){
+     ctx.beginPath();
+    ctx.moveTo(x,y-h/2);
+    ctx.lineTo(x-h/2,y+h/2);
+    ctx.lineTo(x+h/2,y+h/2);
+    ctx.closePath();
+    ctx.stroke();
 
-            path.moveTo(x+h/2,y+h/2);
-            path.lineTo(x-h/2,y+h/2);
-            ctx.stroke(path);
+
+//            var path = new Path2D();
+//            path.moveTo(x,y-h/2);
+//            path.lineTo(x-h/2,y+h/2);
+//            ctx.stroke(path);
+//            path.lineTo(x+h/2,y+h/2);
+//
+//            path.moveTo(x+h/2,y+h/2);
+//            path.lineTo(x-h/2,y+h/2);
+//            ctx.stroke(path);
 
 }
 function drawrectangle(x,y,length,breadth){
-
+    //clearRect(x-length/2,y-breadth/2,length,breadth)
     ctx.rect(x-length/2,y-breadth/2,length,breadth);
     ctx.stroke();
 }
