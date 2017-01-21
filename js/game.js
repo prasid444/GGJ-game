@@ -1,5 +1,6 @@
  var objA;
  var objB;
+var tolerance=5;
  var objC;
  var animationTime=20;
 var radius = 20;
@@ -82,6 +83,10 @@ var triangleB;
      objCleft = canvas.width / 2 + 70 - Math.floor(Math.random() * 200);
      objCtop = canvas.height / 2 + 70 - Math.floor(Math.random() * 200);
 
+     ctx.font = "15px serif"
+     ctx.fillText('Intersect both here',objCleft-radiusC-40,objCtop+radiusC+20);
+     ctx.fillText('Click to create ripple',objAleft-radiusC-20,objAtop+radiusC+20);
+     ctx.fillText('Click to create ripple',objBleft-radiusC-50,objBtop+radiusC+20);
      //to check the clicked
      distancetoA=Math.floor(Math.sqrt(Math.pow(objAleft-objCleft,2)+Math.pow(objAtop-objCtop,2)));
      console.log("distance to a is :"+distancetoA);
@@ -90,6 +95,7 @@ var triangleB;
      console.log("distance to b is :"+distancetoB);
 
      draw();
+
 
      //for clicked on canvas
     canvas.addEventListener('click',function (e) {
@@ -121,7 +127,7 @@ var triangleB;
         }
     }
         else{ //for checking in other area which is objB
-           checkcollision();
+
             switch(objB){
             case 0:
                 break;
@@ -241,6 +247,11 @@ function enlargerectangleB(){
              break;
          case 1:
              drawcircle(objCleft,objCtop,radiusC);
+             //ctx.font = "30px Arial";
+             //ctx.fillText("Intersect here",120,125);
+             //ctx.rect(objCleft-radiusC,objCtop+radiusC,100,20);
+
+
 
              break;
          case 2:
@@ -321,14 +332,14 @@ function enlargerectangleB(){
 
 
 //for circles;
- var dcircle = function (ctx,x, y, r) {
-     ctx.beginPath();
-     ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-     ctx.lineWidth = 1;
-     ctx.strokeStyle = '#003300';
-     ctx.stroke();
-     console.log("circle drawn at C")
- };
+// var dcircle = function (ctx,x, y, r) {
+//     ctx.beginPath();
+//     ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+//     ctx.lineWidth = 1;
+//     ctx.strokeStyle = '#003300';
+//     ctx.stroke();
+//     console.log("circle drawn at C")
+// };
 var Circle = function(x, y, r) {
     this.left = x - r;
     this.top = y - r;
@@ -336,7 +347,8 @@ var Circle = function(x, y, r) {
     this.bottom = y + r;
 };
 var dCircle = function (ctx, x, y, r, circles) {
-    dcircle(ctx, x, y, r);
+    //dcircle(ctx, x, y, r);
+    drawcircle(x,y,r);
     var circle = new Circle(x, y, r);
     circles.push(circle);
     //ctx.rect(x - w / 2, y - h / 2, w, h);
@@ -344,17 +356,17 @@ var dCircle = function (ctx, x, y, r, circles) {
 };
 
 //for rectangles
-var drectangle = function (ctx,x, y,w,h) {
+//var drectangle = function (ctx,x, y,w,h) {
+////     ctx.rect(x - w / 2, y - h / 2, w, h);
+////     ctx.stroke();
+//     ctx.beginPath();
 //     ctx.rect(x - w / 2, y - h / 2, w, h);
+//     ctx.closePath();
+//    ctx.lineWidth=1;
+//   //  ctx.fill();
 //     ctx.stroke();
-     ctx.beginPath();
-     ctx.rect(x - w / 2, y - h / 2, w, h);
-     ctx.closePath();
-    ctx.lineWidth=1;
-   //  ctx.fill();
-     ctx.stroke();
-
- };
+//
+// };
 var Rectangles = function(x, y, w,h) {
     this.left = x - w/2;
     this.top = y - h/2;
@@ -362,7 +374,8 @@ var Rectangles = function(x, y, w,h) {
     this.bottom = y + h/2;
 };
 var dRectangles = function (ctx, x, y, w,h , rectangles) {
-    drectangle(ctx, x, y, w,h);
+    //drectangle(ctx, x, y, w,h);
+    drawrectangle(x,y,w,h);
     var rectangle = new Rectangles(x, y, w,h);
     rectangles.push(rectangle);
 };
@@ -390,13 +403,13 @@ function checkfailedA(){
         case 0:
             break;
         case 1:
-            if(radiusA>(distancetoA+radiusC))
+            if(radiusA>(distancetoA+radiusC+tolerance))
                 return true;
             else
                 return false;
             break;
         case 2:
-             if((objAleft+lengthA/2 > objCleft+radiusC)&& (objAtop+breadthA/2 > objCtop+radiusC) )
+             if((objAleft+lengthA/2 > objCleft+radiusC+tolerance)&& (objAtop+breadthA/2 > objCtop+radiusC+tolerance) )
                 return true;
             else
                 return false;
@@ -412,13 +425,13 @@ function checkfailedB(){
         case 0:
             break;
         case 1:
-            if(radiusB>(distancetoB+radiusC))
+            if(radiusB>(distancetoB+radiusC+tolerance))
                 return true;
             else
                 return false;
             break;
         case 2:
-            if((objBleft-lengthB/2 < objCleft-radiusC)&& (objBtop-breadthB/2 < objCtop-radiusC) )
+            if((objBleft-lengthB/2 < objCleft-radiusC-tolerance)&& (objBtop-breadthB/2 < objCtop-radiusC-tolerance) )
                 return true;
             else
                 return false;
