@@ -40,6 +40,7 @@ var rectangleB;
 var triangleA;
 var triangleB;
 
+var gameStatus=true;
 
 
 
@@ -385,18 +386,23 @@ var dRectangles = function (ctx, x, y, w,h , rectangles) {
 //for checking collision or failed result
 function checkcollision(){
 
+    if(gameStatus){
     console.log("collision checked");
     if(checkfailedA() || checkfailedB()){
       alert("better try again HA! HA! HA!");
+        gameStatus=false;
         location.reload();
+
     }
     else if(checksuccessA() &&  checksuccessB()){
 
-        alert("collision successful");
+        alert("Congratulation, YOU WIN");
+        gameStatus=false;
         location.reload();
     }
 
-requestAnimationFrame(checkcollision);
+        requestAnimationFrame(checkcollision);
+    }
 }
 function checkfailedA(){
     switch(objA){
