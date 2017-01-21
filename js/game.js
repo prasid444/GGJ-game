@@ -7,14 +7,19 @@ var radiusA;
 var radiusB;
 var radiusC;
 
+var length = 50;
+var breadth = 40;
 var lengthA;
 var lengthB;
 var breadthA;
 var breadthB;
 
- var length = 50;
- var breadth = 40;
+
  var height = 40;
+var heightA;
+var heightB;
+
+
  var objAleft = 50;
  var objAtop = 50;
  var objBleft;
@@ -35,17 +40,10 @@ var triangleA;
 var triangleB;
 
 
-//var circlesA;
-//var trianglesA;
-//var rectanglesA;
-//var circlesB;
-//var trianglesB;
-//var rectanglesB;
+
 
  function init() {
-//     circlesA=[];
-//     trianglesA=[];
-//     rectanglesA=[];
+
      circleA=[];
      circleB=[];
      rectangleA=[];
@@ -54,16 +52,22 @@ var triangleB;
      triangleB=[];
 
 
+     //assigning radius for circles
      radiusA=radius;
      radiusB=radius;
      radiusC=radius;
 
+     //assigning length and breadth for rectangles
      lengthB=length;
      lengthA=length;
      breadthA=breadth;
      breadthB=breadth;
 
-     //requestAnimationFrame= requestAnimationFrame||webkitRequestAnimationFrame;
+     //assigning height for triangles
+     heightA=height;
+     heightB=height;
+
+     requestAnimationFrame= requestAnimationFrame||webkitRequestAnimationFrame;
      objA =Math.floor(Math.random() * 2 +1);
      objB =Math.floor(Math.random() * 2 +1);
      objC =1; // Math.floor(Math.random() * 3);
@@ -74,9 +78,9 @@ var triangleB;
      objBtop = canvas.height - 100;
      objBleft = canvas.width - 100;
 
-     //for positioning targer C
-     objCleft = canvas.width / 2;// + 70 - Math.floor(Math.random() * 200);
-     objCtop = canvas.height / 2;// + 70 - Math.floor(Math.random() * 200);
+     //for positioning target C
+     objCleft = canvas.width / 2 + 70 - Math.floor(Math.random() * 200);
+     objCtop = canvas.height / 2 + 70 - Math.floor(Math.random() * 200);
 
      //to check the clicked
      distancetoA=Math.floor(Math.sqrt(Math.pow(objAleft-objCleft,2)+Math.pow(objAtop-objCtop,2)));
@@ -100,30 +104,39 @@ var triangleB;
                 break;
             case 1:
                 if (clickedX < circleA[0].right && clickedX > circleA[0].left && clickedY > circleA[0].top && clickedY < circleA[0].bottom){
-                    setInterval(enlargecircleA,animationTime);
+                    //setInterval(enlargecircleA,animationTime);
+                    enlargecircleA();
+                    checkcollision();
                 }
                 break;
             case 2:
                 if (clickedX < rectangleA[0].right && clickedX > rectangleA[0].left && clickedY > rectangleA[0].top && clickedY < rectangleA[0].bottom){
-                    setInterval(enlargerectangleA,animationTime);
+                    //setInterval(enlargerectangleA,animationTime);
+                    enlargerectangleA();
+                    checkcollision();
                 }
                 break;
             default:
                 break;
         }
     }
-        else{                                           //for checking in other area which is objB
+        else{ //for checking in other area which is objB
+           checkcollision();
             switch(objB){
             case 0:
                 break;
             case 1:
                     if (clickedX < circleB[0].right && clickedX > circleB[0].left && clickedY > circleB[0].top && clickedY < circleB[0].bottom){
-                    setInterval(enlargecircleB,animationTime);
+                    //setInterval(enlargecircleB,animationTime);
+                        enlargecircleB();
+                        checkcollision();
                 }
                 break;
             case 2:
                     if (clickedX < rectangleB[0].right && clickedX > rectangleB[0].left && clickedY > rectangleB[0].top && clickedY < rectangleB[0].bottom){
-                    setInterval(enlargerectangleB,animationTime);
+                    //setInterval(enlargerectangleB,animationTime);
+                        enlargerectangleB();
+                        checkcollision();
                 }
                 break;
             default:
@@ -160,29 +173,31 @@ function enlargecircleA(){
 
     radiusA++;
     drawcircle(objAleft,objAtop, radiusA);
-    checkcollision();
+    //checkcollision();
     console.log("radiusA:"+radiusA);
-
+    requestAnimationFrame(enlargecircleA);
 }
 function enlargecircleB(){
 
     radiusB++;
     drawcircle(objBleft, objBtop, radiusB);
     console.log("radiusB:"+radiusB);
-    checkcollision();
-    //requestAnimationFrame(enlargecircleB);
+    //checkcollision();
+    requestAnimationFrame(enlargecircleB);
 }
 function enlargerectangleA(){
     lengthA++;
     breadthA++;
     drawrectangle(objAleft,objAtop,lengthA,breadthA);
-    checkcollision();
+    //checkcollision();
+    requestAnimationFrame(enlargerectangleA);
 }
 function enlargerectangleB(){
     lengthB++;
     breadthB++;
     drawrectangle(objBleft,objBtop,lengthB,breadthB);
-    checkcollision();
+    //checkcollision();
+    requestAnimationFrame(enlargerectangleB);
 }
 
  function draw() {
@@ -356,6 +371,8 @@ var dRectangles = function (ctx, x, y, w,h , rectangles) {
 
 //for checking collision or failed result
 function checkcollision(){
+
+    console.log("collision checked");
     if(checkfailedA() || checkfailedB()){
       alert("better try again HA! HA! HA!");
         location.reload();
@@ -366,7 +383,7 @@ function checkcollision(){
         location.reload();
     }
 
-
+requestAnimationFrame(checkcollision);
 }
 function checkfailedA(){
     switch(objA){
