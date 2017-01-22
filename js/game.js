@@ -329,9 +329,9 @@
  }
  window.onload = init;
 
- function buttonClicked() {
-     location.reload(true);
- }
+// function buttonClicked() {
+//     this.css("display","none");
+// }
 
 
 
@@ -496,3 +496,12 @@
      }
 
  }
+
+$(document).on('click','#target', function(){
+   $('body').removeClass("forBackground");
+    $('button').addClass("hideButton");
+    $('canvas').removeClass("forHiding")
+})
+//function buttonclicked(){
+//    alert( "Handler for .click() called." );
+//}
