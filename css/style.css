@@ -11,6 +11,7 @@
     position: relative;
     height: 100%;
     width: 100%;
+    background-image: image(images/GGJ00_GameCredits_SplashScreen);
 }
 
 .myButton {
