@@ -195,16 +195,16 @@
  }
 
  function enlargerectangleA() {
-     lengthA+=2;
-     breadthA+=2;
+     lengthA += 2;
+     breadthA += 2;
      drawrectangle(objAleft, objAtop, lengthA, breadthA);
      //checkcollision();
      requestAnimationFrame(enlargerectangleA);
  }
 
  function enlargerectangleB() {
-     lengthB+=2;
-     breadthB+=2;
+     lengthB += 2;
+     breadthB += 2;
      drawrectangle(objBleft, objBtop, lengthB, breadthB);
      //checkcollision();
      requestAnimationFrame(enlargerectangleB);
@@ -329,9 +329,9 @@
  }
  window.onload = init;
 
-// function buttonClicked() {
-//     this.css("display","none");
-// }
+ // function buttonClicked() {
+ //     this.css("display","none");
+ // }
 
 
 
@@ -497,11 +497,11 @@
 
  }
 
-$(document).on('click','#target', function(){
-   $('body').removeClass("forBackground");
-    $('button').addClass("hideButton");
-    $('canvas').removeClass("forHiding")
-})
-//function buttonclicked(){
-//    alert( "Handler for .click() called." );
-//}
+ $(document).on('click', '#target', function () {
+         $('body').removeClass("forBackground");
+         $('button').addClass("hideButton");
+         $('canvas').removeClass("forHiding")
+     })
+     //function buttonclicked(){
+     //    alert( "Handler for .click() called." );
+     //}
