@@ -7,17 +7,34 @@
     background-color: #f0f8ff;
 }
 
+.forHiding{
+    display: none;
+}
 .myBody {
+    padding: 0;
     position: relative;
     height: 100%;
     width: 100%;
-    background-image: image(images/GGJ00_GameCredits_SplashScreen);
+
+
+
+}
+.forBackground{
+    background-image: url("../images/GGJ00_GameCredits_SplashScreen.jpg");
+/*    background-size: contain;*/
+    background-repeat:round;
 }
 
 .myButton {
 
     position: absolute;
-    left: 90%;
-    top: 10%;
+    left: 45%;
+    top: 80%;
+    height: 40px;
+    width: 100px;
     background-color: aqua;
+}
+
+.hideButton{
+    display: none;
 }
